@@ -274,6 +274,12 @@ variable "atlantis_bitbucket_user_token_ssm_parameter_name" {
   default     = "/atlantis/bitbucket/user/token"
 }
 
+variable "atlantis_web_password_ssm_parameter_name" {
+  description = "Name of SSM parameter to keep atlantis_web_password"
+  type        = string
+  default     = "/atlantis/web/password"
+}
+
 variable "ssm_kms_key_arn" {
   description = "ARN of KMS key to use for encryption and decryption of SSM Parameters. Required only if your key uses a custom KMS key and not the default key"
   type        = string
