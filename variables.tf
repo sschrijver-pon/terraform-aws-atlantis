@@ -627,6 +627,12 @@ variable "atlantis_web_username" {
   default     = ""
 }
 
+variable "atlantis_web_password" {
+  description = "Web password for basic authentication"
+  type        = string
+  default     = ""
+}
+
 variable "custom_environment_secrets" {
   description = "List of additional secrets the container will use (list should contain maps with `name` and `valueFrom`)"
   type = list(object(
