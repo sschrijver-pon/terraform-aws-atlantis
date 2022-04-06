@@ -78,6 +78,10 @@ locals {
       name  = "ATLANTIS_HIDE_PREV_PLAN_COMMENTS"
       value = var.atlantis_hide_prev_plan_comments
     },
+     {
+      name  = "ATLANTIS_WEB_USERNAME"
+      value = var.atlantis_web_username
+    },
   ]
 
   # ECS task definition
@@ -96,6 +100,14 @@ locals {
     {
       name      = local.secret_webhook_key
       valueFrom = var.webhook_ssm_parameter_name
+    },
+  ] : []
+
+  # Webhook secrets are not supported by BitBucket
+  container_definition_web_auth = local.atlantis_web_password != "" ? [
+    {
+      name      = "ATLANTIS_WEB_PASSWORD"
+      valueFrom = var.atlantis_web_password_ssm_parameter_name
     },
   ] : []
 
@@ -180,6 +192,16 @@ resource "aws_ssm_parameter" "atlantis_bitbucket_user_token" {
   count = var.atlantis_bitbucket_user_token != "" ? 1 : 0
 
   name  = var.atlantis_bitbucket_user_token_ssm_parameter_name
+  type  = "SecureString"
+  value = var.atlantis_bitbucket_user_token
+
+  tags = local.tags
+}
+    
+resource "aws_ssm_parameter" "atlantis_web_password" {
+  count = var.atlantis_web_password != "" ? 1 : 0
+
+  name  = var.atlantis_web_password_ssm_parameter_name
   type  = "SecureString"
   value = var.atlantis_bitbucket_user_token
 
@@ -634,7 +656,8 @@ module "container_definition_github_gitlab" {
   secrets = concat(
     local.container_definition_secrets_1,
     local.container_definition_secrets_2,
-    var.custom_environment_secrets,
+    local.container_definition_web_auth,
+    var.custom_environment_secrets
   )
 }
 
