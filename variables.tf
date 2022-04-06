@@ -614,6 +614,13 @@ variable "atlantis_bitbucket_base_url" {
   default     = ""
 }
 
+# Web auth
+variable "atlantis_web_username" {
+  description = "Web username for basic authentication"
+  type        = string
+  default     = ""
+}
+
 variable "custom_environment_secrets" {
   description = "List of additional secrets the container will use (list should contain maps with `name` and `valueFrom`)"
   type = list(object(
