@@ -104,7 +104,7 @@ locals {
   ] : []
 
   # Webhook secrets are not supported by BitBucket
-  container_definition_web_auth = local.atlantis_web_password != "" ? [
+  container_definition_web_auth = var.atlantis_web_password != "" ? [
     {
       name      = "ATLANTIS_WEB_PASSWORD"
       valueFrom = var.atlantis_web_password_ssm_parameter_name
