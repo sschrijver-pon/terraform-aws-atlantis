@@ -714,6 +714,7 @@ module "container_definition_bitbucket" {
   secrets = concat(
     local.container_definition_secrets_1,
     var.custom_environment_secrets,
+    local.container_definition_web_auth
   )
 }
 
