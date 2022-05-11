@@ -203,7 +203,7 @@ resource "aws_ssm_parameter" "atlantis_web_password" {
 
   name  = var.atlantis_web_password_ssm_parameter_name
   type  = "SecureString"
-  value = var.atlantis_bitbucket_user_token
+  value = var.atlantis_web_password
 
   tags = local.tags
 }
