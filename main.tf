@@ -82,6 +82,10 @@ locals {
       name  = "ATLANTIS_WEB_USERNAME"
       value = var.atlantis_web_username
     },
+    {
+      name  = "ATLANTIS_WEB_BASIC_AUTH"
+      value = var.atlantis_web_basic_auth
+    },
   ]
 
   # ECS task definition
