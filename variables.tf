@@ -621,6 +621,12 @@ variable "atlantis_bitbucket_base_url" {
 }
 
 # Web auth
+variable "atlantis_web_basic_auth" {
+  description = "Enable basic authentication"
+  type        = bool
+  default     = false
+}
+
 variable "atlantis_web_username" {
   description = "Web username for basic authentication"
   type        = string
